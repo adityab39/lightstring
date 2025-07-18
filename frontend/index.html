@@ -63,8 +63,6 @@
       applyColormap(color) {
         this.selectedColormap = color;
         this.generate();
-
-        // Optional: apply color filter for fun (UI-only, not needed for file logic)
         const filterMap = {
           grey: 'grayscale(100%)',
           purple: 'hue-rotate(270deg)',
