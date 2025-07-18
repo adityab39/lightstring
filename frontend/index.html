@@ -62,7 +62,6 @@
     methods: {
       applyColormap(color) {
         this.selectedColormap = color;
-        this.generate();
         const filterMap = {
           grey: 'grayscale(100%)',
           purple: 'hue-rotate(270deg)',
@@ -76,19 +75,28 @@
           output.style.filter = filterMap[color] || 'none';
         }
       },
-      generate() {
-        if (!this.selectedColormap) return;
+      async generate() {
+        if (!this.selectedColormap || !this.userInput) {
+            alert("Please enter a string and select a colormap.");
+            return;
+        }
+        try {
+            const response = await fetch("https://xgnwvafwj0.execute-api.us-east-2.amazonaws.com/prod/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                input: this.userInput,
+                colormap: this.selectedColormap
+            })
+            });
 
-        const input = this.userInput.replace(/[^a-zA-Z ]/g, "");
-        this.images = input.split('').flatMap(char => {
-          if (char === ' ') return [];
-
-          const caseType = char === char.toUpperCase() ? "uppercase" : "lowercase";
-          const upperChar = char.toUpperCase();
-          const filename = `${this.selectedColormap}_${upperChar}_${caseType}_dof00${this.iteration}.png`;
-          return [`${this.baseURL}/${filename}`];
-        });
-      }
+            const data = await response.json();
+            console.log("Lambda Response:", data);
+        } catch (error) {
+            console.error("Error generating images:", error);
+            alert("Something went wrong while generating the crystal letters.");
+        }
+        }
     }
   }).mount("#app");
 </script>
