@@ -34,13 +34,15 @@
         <img v-for="(src, idx) in images" :key="idx" :src="src" alt="char" />
       </div>
 
-      <div class="colormap-buttons">
-        <button @click="applyColormap('gray')">Apply grey colormap</button>
-        <button @click="applyColormap('purple')">Apply purple colormap</button>
-        <button @click="applyColormap('blue')">Apply blue colormap</button>
-        <button @click="applyColormap('green')">Apply green colormap</button>
-        <button @click="applyColormap('orange')">Apply orange colormap</button>
-        <button @click="applyColormap('red')">Apply red colormap</button>
+        <div class="colormap-buttons">
+            <button
+            v-for="color in ['grey', 'purple', 'blue', 'green', 'orange', 'red']"
+            :key="color"
+            :class="['colormap-button', { selected: selectedColormap === color }]"
+            @click="applyColormap(color)"
+            >
+            Apply {{ color }} colormap
+            </button>
         </div>
     </main>
   </div>
@@ -53,33 +55,41 @@
         userInput: "",
         images: [],
         baseURL: "https://lightstring-images.s3.amazonaws.com/String_images",
-        iteration: 1000
+        iteration: 1000,
+        selectedColormap: null,
       };
     },
     methods: {
-      generate() {
-        const input = this.userInput.toUpperCase().replace(/[^A-Z ]/g, "");
-        this.images = input.split('').map(char => {
-          if (char === ' ') return '';
-          return `${this.baseURL}/${char}_${this.iteration}.png`;
-        }).filter(Boolean);
-      },
-
       applyColormap(color) {
-        const map = {
-          gray: 'grayscale(100%)',
+        this.selectedColormap = color;
+        this.generate();
+
+        // Optional: apply color filter for fun (UI-only, not needed for file logic)
+        const filterMap = {
+          grey: 'grayscale(100%)',
           purple: 'hue-rotate(270deg)',
           blue: 'hue-rotate(200deg)',
           green: 'hue-rotate(100deg)',
           orange: 'hue-rotate(45deg)',
           red: 'hue-rotate(0deg)',
         };
-
-        const filter = map[color] || 'none';
         const output = document.getElementById("crystal-output");
         if (output) {
-          output.style.filter = filter;
+          output.style.filter = filterMap[color] || 'none';
         }
+      },
+      generate() {
+        if (!this.selectedColormap) return;
+
+        const input = this.userInput.replace(/[^a-zA-Z ]/g, "");
+        this.images = input.split('').flatMap(char => {
+          if (char === ' ') return [];
+
+          const caseType = char === char.toUpperCase() ? "uppercase" : "lowercase";
+          const upperChar = char.toUpperCase();
+          const filename = `${this.selectedColormap}_${upperChar}_${caseType}_dof00${this.iteration}.png`;
+          return [`${this.baseURL}/${filename}`];
+        });
       }
     }
   }).mount("#app");

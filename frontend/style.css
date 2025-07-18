@@ -115,7 +115,7 @@ h1 span {
 
 .colormap-buttons button {
   padding: 10px 16px;
-  background-color: #1e40af; /* deep blue */
+  background-color: #1e40af;
   color: white;
   border: none;
   border-radius: 6px;
@@ -126,5 +126,9 @@ h1 span {
 }
 
 .colormap-buttons button:hover {
-  background-color: #2563eb; /* lighter on hover */
+  background-color: #2563eb;
+}
+
+.colormap-button.selected {
+  background-color: #3b82f6;
 }
