@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LightString</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="logo">LightString</div>
+      <nav class="nav-links">
+        <a href="#" class="nav-link active">Home</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Create beautiful text with <span>Crystal Letters</span></h1>
+
+      <div class="input-box">
+        <input v-model="userInput" placeholder="Type your string (A-Z only)" />
+        <button @click="generate">Generate</button>
+        
+      </div>
+
+
+      <div class="quick-try">Click Generate to see your crystal string ✨</div>
+
+      <div id="crystal-output" class="crystal-row" v-if="images.length">
+        <img v-for="(src, idx) in images" :key="idx" :src="src" alt="char" />
+      </div>
+
+      <div class="colormap-buttons">
+        <button @click="applyColormap('gray')">Apply grey colormap</button>
+        <button @click="applyColormap('purple')">Apply purple colormap</button>
+        <button @click="applyColormap('blue')">Apply blue colormap</button>
+        <button @click="applyColormap('green')">Apply green colormap</button>
+        <button @click="applyColormap('orange')">Apply orange colormap</button>
+        <button @click="applyColormap('red')">Apply red colormap</button>
+        </div>
+    </main>
+  </div>
+
+<script>
+  const { createApp } = Vue;
+  createApp({
+    data() {
+      return {
+        userInput: "",
+        images: [],
+        baseURL: "https://lightstring-images.s3.amazonaws.com/String_images",
+        iteration: 1000
+      };
+    },
+    methods: {
+      generate() {
+        const input = this.userInput.toUpperCase().replace(/[^A-Z ]/g, "");
+        this.images = input.split('').map(char => {
+          if (char === ' ') return '';
+          return `${this.baseURL}/${char}_${this.iteration}.png`;
+        }).filter(Boolean);
+      },
+
+      applyColormap(color) {
+        const map = {
+          gray: 'grayscale(100%)',
+          purple: 'hue-rotate(270deg)',
+          blue: 'hue-rotate(200deg)',
+          green: 'hue-rotate(100deg)',
+          orange: 'hue-rotate(45deg)',
+          red: 'hue-rotate(0deg)',
+        };
+
+        const filter = map[color] || 'none';
+        const output = document.getElementById("crystal-output");
+        if (output) {
+          output.style.filter = filter;
+        }
+      }
+    }
+  }).mount("#app");
+</script>
+</body>
+</html>
