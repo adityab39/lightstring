@@ -13,7 +13,7 @@
 
     <AnimationPage
       v-else
-      :animationData="animationData"
+      :gifUrls="animationData"
       :userInput="userInput"
       :colormap="selectedColormap"
       :baseURL="baseURL"
@@ -53,17 +53,12 @@ export default {
         });
 
         const data = await response.json();
-        const framesPerChar = 50;
-        const groupedData = [];
+        const gifUrls = data;
 
-        for (let i = 0; i < data.length; i += framesPerChar) {
-          groupedData.push(data.slice(i, i + framesPerChar));
-        }
-
-        this.animationData = groupedData;
+        this.animationData = gifUrls; 
         this.showAnimationPage = true;
       } catch (err) {
-        console.error("Error fetching animation data:", err);
+        console.error("Error fetching GIF URLs:", err);
       }
     },
     applyColormap(color) {

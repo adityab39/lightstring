@@ -146,3 +146,52 @@ h1 span {
   width: 100px;
   height: auto;
 }
+
+.choose-color-text {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+
+.colormap-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 4px;
+  transition: transform 0.2s ease;
+}
+
+.colormap-button:hover {
+  transform: scale(1.05);
+}
+
+/* Color-specific styles */
+.greys {
+  background-color: grey;
+}
+
+.purples {
+  background-color: purple;
+}
+
+.blues {
+  background-color: #1e90ff;
+}
+
+.greens {
+  background-color: green;
+}
+
+.oranges {
+  background-color: orange;
+  color: black; 
+}
+
+.reds {
+  background-color: red;
+}
