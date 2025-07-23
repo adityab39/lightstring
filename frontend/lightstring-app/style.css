@@ -173,35 +173,55 @@ h1 span {
   transform: scale(1.05);
 }
 
-/* Color-specific styles */
-.greys {
-  background-color: grey;
-}
-
-.purples {
-  background-color: purple;
-}
-
-.blues {
-  background-color: #1e90ff;
-}
-
-.greens {
-  background-color: green;
-}
-
-.oranges {
-  background-color: orange;
-  color: black; 
-}
-
-.reds {
-  background-color: red;
-}
-
-
 .error-message {
   color: #ff4d4f;
   font-weight: bold;
   margin-top: 1rem;
+}
+
+.colormap-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.color-button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-button:hover {
+  transform: scale(1.05);
+}
+
+.color-button.selected {
+  outline: 2px solid white;
+  box-shadow: 0 0 10px white;
+  /* DO NOT override background-color */
+}
+
+.grey {
+  background-color: #7d7d7d;
+}
+.purple {
+  background-color: #800080;
+}
+.blue {
+  background-color: #1e90ff;
+}
+.green {
+  background-color: #228B22;
+}
+.orange {
+  background-color: #FFA500;
+}
+.red {
+  background-color: #DC143C;
 }

@@ -14,11 +14,11 @@
 
       <button
         v-for="color in colors"
-        :key="color"
-        :class="['colormap-button', color.toLowerCase(), { selected: selectedColormap === color }]"
-        @click="$emit('colormapSelected', color)"
+        :key="color.value"
+        :class="['colormap-button', color.cssClass, { selected: selectedColormap === color.value }]"
+        @click="$emit('colormapSelected', color.value)"
       >
-        {{ color }}
+        {{ color.label }}
       </button>
 
       <p v-if="errorMessage" style="color: red; margin-top: 10px;">

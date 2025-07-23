@@ -37,7 +37,14 @@ export default {
       showAnimationPage: false,
       apiURL: "https://xgnwvafwj0.execute-api.us-east-2.amazonaws.com/prod/generate",
       baseURL: "https://lightstring-images.s3.amazonaws.com/String_images/",
-      colors: ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds'],
+      colors: [
+        { label: 'Grey', value: 'Greys', cssClass: 'grey' },
+        { label: 'Purple', value: 'Purples', cssClass: 'purple' },
+        { label: 'Blue', value: 'Blues', cssClass: 'blue' },
+        { label: 'Green', value: 'Greens', cssClass: 'green' },
+        { label: 'Orange', value: 'Oranges', cssClass: 'orange' },
+        { label: 'Red', value: 'Reds', cssClass: 'red' }
+      ],
       errorMessage: ''
     };
   },
