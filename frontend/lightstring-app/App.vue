@@ -63,9 +63,9 @@ export default {
         this.errorMessage = 'Please enter a string.';
         return;
       }
-
-      if (!/^[a-zA-Z]+$/.test(this.userInput)) {
-        this.errorMessage = 'Please enter alphabetic characters (A-Z, a-z) only.';
+      
+      if (!/^[a-zA-Z\s]+$/.test(this.userInput)) {
+        this.errorMessage = 'Please enter alphabet letters and spaces only.';
         return;
       }
 
