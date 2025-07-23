@@ -130,7 +130,10 @@ h1 span {
 }
 
 .colormap-button.selected {
-  background-color: #3b82f6;
+  color: white !important;
+  border: 2px solid white;
+  font-weight: bold;
+  box-shadow: 0 0 10px white;
 }
 
 .animation-page {
@@ -194,4 +197,11 @@ h1 span {
 
 .reds {
   background-color: red;
+}
+
+
+.error-message {
+  color: #ff4d4f;
+  font-weight: bold;
+  margin-top: 1rem;
 }

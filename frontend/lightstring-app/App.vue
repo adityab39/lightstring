@@ -6,6 +6,7 @@
       :userInput="userInput"
       :colors="colors"
       :selectedColormap="selectedColormap"
+      :errorMessage="errorMessage"
       @updateUserInput="userInput = $event"
       @colormapSelected="applyColormap"
       @generateClicked="generate"
@@ -37,10 +38,23 @@ export default {
       apiURL: "https://xgnwvafwj0.execute-api.us-east-2.amazonaws.com/prod/generate",
       baseURL: "https://lightstring-images.s3.amazonaws.com/String_images/",
       colors: ['Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds'],
+      errorMessage: ''
     };
   },
   methods: {
     async generate() {
+      this.errorMessage = ''; 
+
+      if (!this.selectedColormap) {
+        this.errorMessage = 'Please select a color.';
+        return;
+      }
+
+      if (!this.userInput.trim()) {
+        this.errorMessage = 'Please enter a string.';
+        return;
+      }
+
       if (!this.selectedColormap || !this.userInput) return;
       try {
         const response = await fetch(this.apiURL, {

@@ -30,11 +30,13 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .gif-image {
-  width: 150px;
+  width: min(18vw, 800px);
   height: auto;
   border: 1px solid #fff;
   padding: 10px;

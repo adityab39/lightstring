@@ -21,6 +21,10 @@
         {{ color }}
       </button>
 
+      <p v-if="errorMessage" style="color: red; margin-top: 10px;">
+        {{ errorMessage }}
+      </p>
+
       <div class="input-box">
         <input :value="userInput" @input="$emit('updateUserInput', $event.target.value)" placeholder="Type your string (A-Z only)" />
         <button @click="$emit('generateClicked')">Generate</button>
@@ -35,6 +39,6 @@
 
 <script>
 export default {
-  props: ['userInput', 'colors', 'selectedColormap']
+  props: ['userInput', 'colors', 'selectedColormap', 'errorMessage']
 };
 </script>
