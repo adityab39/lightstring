@@ -64,6 +64,11 @@ export default {
         return;
       }
 
+      if (!/^[a-zA-Z]+$/.test(this.userInput)) {
+        this.errorMessage = 'Please enter alphabetic characters (A-Z, a-z) only.';
+        return;
+      }
+
       if (!this.selectedColormap || !this.userInput) return;
       try {
         const response = await fetch(this.apiURL, {

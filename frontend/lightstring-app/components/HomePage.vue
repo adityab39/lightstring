@@ -26,7 +26,7 @@
       </p>
 
       <div class="input-box">
-        <input :value="userInput" @input="$emit('updateUserInput', $event.target.value)" placeholder="Type your string (A-Z only)" />
+        <input :value="userInput" @input="$emit('updateUserInput', $event.target.value)" placeholder="Type your string (alphabet letters and spaces only)" />
         <button @click="$emit('generateClicked')">Generate</button>
       </div>
 
