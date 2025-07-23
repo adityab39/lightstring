@@ -27,6 +27,8 @@
 import HomePage from './components/HomePage.vue';
 import AnimationPage from './components/AnimationPage.vue';
 
+
+
 export default {
   components: { HomePage, AnimationPage },
   data() {
@@ -35,8 +37,8 @@ export default {
       selectedColormap: null,
       animationData: [],
       showAnimationPage: false,
-      apiURL: "https://xgnwvafwj0.execute-api.us-east-2.amazonaws.com/prod/generate",
-      baseURL: "https://lightstring-images.s3.amazonaws.com/String_images/",
+      apiURL: import.meta.env.VITE_API_URL,
+      baseURL: import.meta.env.VITE_BASE_URL,
       colors: [
         { label: 'Grey', value: 'Greys', cssClass: 'grey' },
         { label: 'Purple', value: 'Purples', cssClass: 'purple' },

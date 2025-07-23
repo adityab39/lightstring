@@ -3,3 +3,5 @@
 *.tfstate
 *.tfstate.backup
 crash.log
+# Environment files
+.env
